@@ -1,0 +1,71 @@
+### 0) Swagger UI
+GET https://localhost:59510/swagger/index.html
+
+### 10) Unauthorized 401
+GET https://localhost:59510/weatherforecast/
+Accept: application/json
+
+### 20) Register a new user
+POST https://localhost:59510/register
+Content-Type: application/json
+{
+  "email": "testuser@example.com",
+  "password": "Test@1234"
+}
+
+### 30) Login with the registered user .. gets a cookie
+POST https://localhost:59510/login?useCookies=true
+Content-Type: application/json
+{
+  "email": "testuser@example.com",
+  "password": "Test@1234"
+  ,"twoFactorCode": "801999"
+}
+###,"twoFactorCode": "931388"
+
+### 40) authorized (has cookie) works now
+GET https://localhost:59510/weatherforecast
+
+### 45) info
+GET https://localhost:59510/manage/info
+
+### 50) get 2FA sharedKey for the user "UYCMCQ3D73S3ZOWJWLZAUSF22N3P7OAV"
+POST https://localhost:59510/manage/2fa
+Content-Type: application/json
+{}
+
+### 60) in authenticator app, add a new (other) account with the sharedKey
+
+### 70) enable 2FA for user
+POST https://localhost:59510/manage/2fa
+Content-Type: application/json
+{
+  "enable": true,
+  "twoFactorCode": "454283"
+}
+###{
+###  "sharedKey": "UYCMCQ3D73S3ZOWJWLZAUSF22N3P7OAV",
+###  "recoveryCodesLeft": 10,
+###  "recoveryCodes": [
+###    "G4DV4-3D95K",
+###    "9399F-MVHVT",
+###    "H92FW-WKN5W",
+###    "XWD66-K3DXB",
+###    "PXR8G-5VTJY",
+###    "GQN63-3NPNF",
+###    "FKNYQ-2HRXK",
+###    "DCPQM-CKXHX",
+###    "8BKKW-5G9FB",
+###    "W54F7-XB2TW"
+###  ],
+###  "isTwoFactorEnabled": true,
+###  "isMachineRemembered": false
+###}
+
+
+### 200) Logout (discard cookie)
+POST https://localhost:59510/logout
+Content-Type: application/json
+{
+  "a": 1
+}
